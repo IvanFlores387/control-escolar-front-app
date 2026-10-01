@@ -1,0 +1,91 @@
+<mat-sidenav-content>
+<mat-sidenav-container class="sidebar-container">
+  <mat-sidenav
+    [opened]="!isMobileView || mobileOpen"
+    [mode]="isMobileView ? 'over' : 'side'"
+    class="sidebar"
+    (closedStart)="closeSidebar()"
+    [disableClose]="!isMobileView">
+
+    <nav>
+      <ul class="sidebar-list">
+        @if (canSeeHomeItem()) {
+          <li
+            routerLink="/app/home"
+            routerLinkActive="active"
+            (click)="closeSidebar()">
+            <mat-icon>home</mat-icon>
+            <span>Inicio</span>
+          </li>
+        }
+
+        @if (canSeeRegisterItem()) {
+          <li
+            routerLink="/registro-usuarios"
+            routerLinkActive="active"
+            (click)="closeSidebar()">
+            <mat-icon>person_add</mat-icon>
+            <span>Registro</span>
+          </li>
+        }
+
+        @if (canSeeAdminItems()) {
+          <li
+            routerLink="/app/administrador"
+            routerLinkActive="active"
+            (click)="closeSidebar()">
+            <mat-icon>admin_panel_settings</mat-icon>
+            <span>Admins</span>
+          </li>
+        }
+
+        @if (canSeeAdminItems()) {
+          <li
+            routerLink="/app/maestros"
+            routerLinkActive="active"
+            (click)="closeSidebar()">
+            <mat-icon>people</mat-icon>
+            <span>Maestros</span>
+          </li>
+        }
+
+        @if (canSeeStudentItems()) {
+          <li
+            routerLink="/app/alumnos"
+            routerLinkActive="active"
+            (click)="closeSidebar()">
+            <mat-icon>school</mat-icon>
+            <span>Alumnos</span>
+          </li>
+        }
+
+        @if (canSeeStudentItems()) {
+          <li
+            routerLink="/app/graficas"
+            routerLinkActive="active"
+            (click)="closeSidebar()">
+            <mat-icon>bar_chart</mat-icon>
+            <span>Gráficas</span>
+          </li>
+        }
+
+        @if (canSeeTeacherItems()) {
+          <li
+            routerLink="/app/eventos-academicos"
+            routerLinkActive="active"
+            class="eventos-academicos"
+            (click)="closeSidebar()">
+            <mat-icon>event</mat-icon>
+            <span>Eventos Académicos</span>
+          </li>
+        }
+      </ul>
+
+      <button mat-flat-button color="warn" class="logout-btn" (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Cerrar sesión</span>
+      </button>
+    </nav>
+  </mat-sidenav>
+</mat-sidenav-container>
+</mat-sidenav-content>

@@ -1,0 +1,52 @@
+<section class="hero-new">
+  <div class="hero-container">
+
+    <div class="hero-form-section">
+      <div class="hero-brand">
+        <img src="/assets/images/escudoB.png" alt="Logo BUAP" class="logo-buap" />
+        <span class="brand-title">BUAP</span>
+      </div>
+
+      <h1 class="hero-title">Control académico dinámico</h1>
+      <p class="hero-subtitle">
+        Gestiona usuarios, materias y eventos con una interfaz ágil diseñada para la comunidad universitaria.
+      </p>
+
+      <div class="hero-actions">
+        <button routerLink="/login" class="btn-login">Entrar al sistema</button>
+      </div>
+
+      <div class="hero-footer-note">
+        <p>Infraestructura escalable para el entorno <strong>escolar</strong>.</p>
+      </div>
+    </div>
+
+    <div class="hero-illustration-section">
+  <div class="welcome-message">
+    <h2>Flujo Evolutivo</h2>
+    <p>Tu información académica, siempre en movimiento.</p>
+  </div>
+
+  <div class="carousel-viewport">
+    <div class="carousel-track" [style.transform]="'translateX(' + (-currentIndex * 100) + '%)'">
+      @for (image of carouselImages; track image) {
+        <div class="carousel-slide">
+          <div class="slide-overlay"></div> <img [src]="image" class="carousel-img">
+        </div>
+      }
+    </div>
+
+    <div class="carousel-indicators">
+      @for (image of carouselImages; track image; let i = $index) {
+        <button
+          class="dot"
+          [class.active]="i === currentIndex"
+          (click)="setSlide(i)">
+        </button>
+      }
+    </div>
+  </div>
+</div>>
+
+  </div>
+</section>

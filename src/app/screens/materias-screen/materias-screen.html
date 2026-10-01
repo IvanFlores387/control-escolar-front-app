@@ -1,0 +1,995 @@
+<div class="wrapper main-content-materias">
+
+  <div class="body-materias">
+
+
+    <!-- =====================================================
+         ENCABEZADO
+         ===================================================== -->
+
+    <div class="page-header">
+
+      <div>
+
+        <span class="title-perfil">
+          Bienvenido {{ name_user }}
+        </span>
+
+        <span class="role-label">
+          {{ rol | titlecase }}
+        </span>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="btn btn-primary btn-nueva-materia"
+        (click)="abrirFormularioRegistro()">
+
+        <i class="bi bi-plus-circle-fill"></i>
+
+        Registrar materia
+
+      </button>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FORMULARIO
+         ===================================================== -->
+
+    @if (mostrarFormulario) {
+
+      <section class="materia-form-card">
+
+
+        <div class="form-card-header">
+
+          <div>
+
+            <span class="form-title">
+
+              {{
+                editando
+                  ? 'Actualizar materia'
+                  : 'Registrar nueva materia'
+              }}
+
+            </span>
+
+
+            <p class="form-subtitle">
+
+              {{
+                editando
+
+                  ? 'Modifica los datos y guarda los cambios.'
+
+                  : 'Captura los datos de la materia que deseas agregar.'
+              }}
+
+            </p>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="icon-close-button"
+            aria-label="Cerrar formulario"
+            (click)="cancelarFormulario()">
+
+            <i class="bi bi-x-lg"></i>
+
+          </button>
+
+        </div>
+
+
+
+        <div class="form-grid">
+
+
+          <!-- CLAVE -->
+
+          <div class="field-group">
+
+            <mat-form-field
+              appearance="outline"
+              class="full-field">
+
+              <mat-label>
+                Clave de la materia
+              </mat-label>
+
+
+              <input
+                matInput
+                maxlength="50"
+                [(ngModel)]="materia.clave_materia"
+                placeholder="Ej. CCOS-101"
+                style="text-transform: uppercase;">
+
+            </mat-form-field>
+
+
+            @if (errors.clave_materia) {
+
+              <div class="invalid-feedback">
+
+                {{ errors.clave_materia }}
+
+              </div>
+
+            }
+
+          </div>
+
+
+
+          <!-- NOMBRE -->
+
+          <div class="field-group">
+
+            <mat-form-field
+              appearance="outline"
+              class="full-field">
+
+              <mat-label>
+                Nombre de la materia
+              </mat-label>
+
+
+              <input
+                matInput
+                maxlength="255"
+                [(ngModel)]="materia.nombre_materia"
+                placeholder="Ej. Aplicaciones Web">
+
+            </mat-form-field>
+
+
+            @if (errors.nombre_materia) {
+
+              <div class="invalid-feedback">
+
+                {{ errors.nombre_materia }}
+
+              </div>
+
+            }
+
+          </div>
+
+
+
+          <!-- SEMESTRE -->
+
+          <div class="field-group">
+
+            <mat-form-field
+              appearance="outline"
+              class="full-field">
+
+              <mat-label>
+                Semestre
+              </mat-label>
+
+
+              <input
+                matInput
+                type="number"
+                min="1"
+                [(ngModel)]="materia.semestre"
+                placeholder="Ej. 6">
+
+            </mat-form-field>
+
+
+            @if (errors.semestre) {
+
+              <div class="invalid-feedback">
+
+                {{ errors.semestre }}
+
+              </div>
+
+            }
+
+          </div>
+
+
+
+          <!-- CRÉDITOS -->
+
+          <div class="field-group">
+
+            <mat-form-field
+              appearance="outline"
+              class="full-field">
+
+              <mat-label>
+                Créditos
+              </mat-label>
+
+
+              <input
+                matInput
+                type="number"
+                min="1"
+                [(ngModel)]="materia.creditos"
+                placeholder="Ej. 5">
+
+            </mat-form-field>
+
+
+            @if (errors.creditos) {
+
+              <div class="invalid-feedback">
+
+                {{ errors.creditos }}
+
+              </div>
+
+            }
+
+          </div>
+
+
+
+          <!-- ESTADO -->
+
+          <div class="field-group">
+
+            <mat-form-field
+              appearance="outline"
+              class="full-field">
+
+              <mat-label>
+                Estado
+              </mat-label>
+
+
+              <mat-select
+                [(ngModel)]="materia.estado">
+
+                <mat-option value="activa">
+                  Activa
+                </mat-option>
+
+                <mat-option value="inactiva">
+                  Inactiva
+                </mat-option>
+
+              </mat-select>
+
+            </mat-form-field>
+
+
+            @if (errors.estado) {
+
+              <div class="invalid-feedback">
+
+                {{ errors.estado }}
+
+              </div>
+
+            }
+
+          </div>
+
+
+
+          <!-- DESCRIPCIÓN -->
+
+          <div class="field-group field-description">
+
+            <mat-form-field
+              appearance="outline"
+              class="full-field description-field">
+
+              <mat-label>
+                Descripción
+              </mat-label>
+
+
+              <textarea
+                matInput
+                rows="4"
+                [(ngModel)]="materia.descripcion"
+                placeholder="Describe brevemente la materia">
+              </textarea>
+
+            </mat-form-field>
+
+
+            @if (errors.descripcion) {
+
+              <div class="invalid-feedback">
+
+                {{ errors.descripcion }}
+
+              </div>
+
+            }
+
+          </div>
+
+        </div>
+
+
+
+        <!-- BOTONES -->
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="btn btn-outline-secondary btn-form"
+            [disabled]="guardando"
+            (click)="cancelarFormulario()">
+
+            Cancelar
+
+          </button>
+
+
+          <button
+            type="button"
+            class="btn btn-primary btn-form"
+            [disabled]="guardando"
+            (click)="guardarMateria()">
+
+
+            @if (guardando) {
+
+              <span
+                class="spinner-border spinner-border-sm me-2"
+                aria-hidden="true">
+              </span>
+
+            } @else {
+
+              <i
+                class="bi"
+                [ngClass]="
+                  editando
+                    ? 'bi-floppy-fill'
+                    : 'bi-plus-circle-fill'
+                ">
+              </i>
+
+            }
+
+
+            {{
+              editando
+                ? 'Guardar cambios'
+                : 'Registrar'
+            }}
+
+          </button>
+
+        </div>
+
+      </section>
+
+    }
+
+
+
+    <!-- =====================================================
+         LISTA DE MATERIAS
+         ===================================================== -->
+
+    <section class="materias-list-card">
+
+
+      <div class="list-header">
+
+        <div>
+
+          <h2 class="title-table">
+            Materias registradas
+          </h2>
+
+
+          <p class="list-subtitle">
+
+            Consulta, busca y administra
+            las materias disponibles.
+
+          </p>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="btn-refresh"
+          [disabled]="cargando"
+          (click)="obtenerMaterias()">
+
+          <i class="bi bi-arrow-clockwise"></i>
+
+          Actualizar
+
+        </button>
+
+      </div>
+
+
+
+      <!-- =================================================
+           BUSCADOR
+           ================================================= -->
+
+      <div class="search-section">
+
+
+        <mat-form-field
+          appearance="outline"
+          class="search-field">
+
+          <mat-label>
+            Buscar materia
+          </mat-label>
+
+
+          <mat-icon matPrefix>
+            search
+          </mat-icon>
+
+
+          <input
+            matInput
+            [(ngModel)]="filtro"
+            (input)="aplicarFiltro()"
+            placeholder="Clave, nombre, semestre, estado o docente">
+
+
+          @if (filtro) {
+
+            <button
+              mat-icon-button
+              matSuffix
+              type="button"
+              aria-label="Limpiar búsqueda"
+              (click)="limpiarFiltro()">
+
+              <mat-icon>
+                close
+              </mat-icon>
+
+            </button>
+
+          }
+
+        </mat-form-field>
+
+
+
+        <div class="records-counter">
+
+          <span class="material-icons">
+            library_books
+          </span>
+
+
+          <span>
+
+            {{ dataSource.filteredData.length }}
+
+            {{
+              dataSource.filteredData.length === 1
+                ? 'materia'
+                : 'materias'
+            }}
+
+          </span>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- =================================================
+           CARGANDO
+           ================================================= -->
+
+      @if (cargando) {
+
+        <div class="loading-state">
+
+          <div
+            class="spinner-border"
+            role="status">
+
+            <span class="visually-hidden">
+              Cargando...
+            </span>
+
+          </div>
+
+
+          <span>
+            Cargando materias...
+          </span>
+
+        </div>
+
+      }
+
+
+
+      <!-- =================================================
+           SIN REGISTROS
+           ================================================= -->
+
+      @else if (
+        lista_materias.length === 0
+      ) {
+
+        <div class="empty-state">
+
+          <span class="material-icons empty-icon">
+            library_books
+          </span>
+
+
+          <h3>
+            No hay materias registradas
+          </h3>
+
+
+          <p>
+            Registra la primera materia para comenzar.
+          </p>
+
+
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="abrirFormularioRegistro()">
+
+            Registrar materia
+
+          </button>
+
+        </div>
+
+      }
+
+
+
+      <!-- =================================================
+           SIN RESULTADOS DE BÚSQUEDA
+           ================================================= -->
+
+      @else if (
+        dataSource.filteredData.length === 0
+      ) {
+
+        <div class="empty-state compact-empty">
+
+          <span class="material-icons empty-icon">
+            search_off
+          </span>
+
+
+          <h3>
+            No encontramos coincidencias
+          </h3>
+
+
+          <p>
+            Prueba con otro término de búsqueda.
+          </p>
+
+
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="limpiarFiltro()">
+
+            Limpiar búsqueda
+
+          </button>
+
+        </div>
+
+      }
+
+
+
+      <!-- =================================================
+           TABLA
+           ================================================= -->
+
+      @else {
+
+        <div class="table-scroll-wrapper">
+
+
+          <table
+            mat-table
+            [dataSource]="dataSource"
+            class="materias-table">
+
+
+            <!-- CLAVE -->
+
+            <ng-container
+              matColumnDef="clave_materia">
+
+              <th
+                mat-header-cell
+                *matHeaderCellDef>
+
+                Clave
+
+              </th>
+
+
+              <td
+                mat-cell
+                *matCellDef="let element">
+
+                <span class="clave-badge">
+
+                  {{ element.clave_materia }}
+
+                </span>
+
+              </td>
+
+            </ng-container>
+
+
+
+            <!-- NOMBRE -->
+
+            <ng-container
+              matColumnDef="nombre_materia">
+
+              <th
+                mat-header-cell
+                *matHeaderCellDef>
+
+                Materia
+
+              </th>
+
+
+              <td
+                mat-cell
+                *matCellDef="let element">
+
+                <div class="materia-name-cell">
+
+                  <span class="materia-name">
+
+                    {{ element.nombre_materia }}
+
+                  </span>
+
+
+                  @if (element.descripcion) {
+
+                    <span class="materia-description">
+
+                      {{ element.descripcion }}
+
+                    </span>
+
+                  }
+
+                </div>
+
+              </td>
+
+            </ng-container>
+
+
+
+            <!-- SEMESTRE -->
+
+            <ng-container
+              matColumnDef="semestre">
+
+              <th
+                mat-header-cell
+                *matHeaderCellDef>
+
+                Semestre
+
+              </th>
+
+
+              <td
+                mat-cell
+                *matCellDef="let element">
+
+                {{ element.semestre ?? '—' }}
+
+              </td>
+
+            </ng-container>
+
+
+
+            <!-- CRÉDITOS -->
+
+            <ng-container
+              matColumnDef="creditos">
+
+              <th
+                mat-header-cell
+                *matHeaderCellDef>
+
+                Créditos
+
+              </th>
+
+
+              <td
+                mat-cell
+                *matCellDef="let element">
+
+                {{ element.creditos ?? '—' }}
+
+              </td>
+
+            </ng-container>
+
+
+
+            <!-- ESTADO -->
+
+            <ng-container
+              matColumnDef="estado">
+
+              <th
+                mat-header-cell
+                *matHeaderCellDef>
+
+                Estado
+
+              </th>
+
+
+              <td
+                mat-cell
+                *matCellDef="let element">
+
+
+                <span
+                  class="status-badge"
+
+                  [ngClass]="
+                    element.estado === 'activa'
+                      ? 'status-active'
+                      : 'status-inactive'
+                  ">
+
+
+                  <span class="status-dot">
+                  </span>
+
+
+                  {{
+                    element.estado === 'activa'
+                      ? 'Activa'
+                      : 'Inactiva'
+                  }}
+
+                </span>
+
+              </td>
+
+            </ng-container>
+
+
+
+            <!-- CREADOR -->
+
+            <ng-container
+              matColumnDef="creado_por">
+
+              <th
+                mat-header-cell
+                *matHeaderCellDef>
+
+                Registrada por
+
+              </th>
+
+
+              <td
+                mat-cell
+                *matCellDef="let element">
+
+
+                @if (element.creado_por) {
+
+                  <div class="creator-cell">
+
+
+                    <span class="creator-name">
+
+                      {{
+                        element.creado_por.first_name
+                      }}
+
+                      {{
+                        element.creado_por.last_name
+                      }}
+
+                    </span>
+
+
+                    <span class="creator-email">
+
+                      {{
+                        element.creado_por.email
+                      }}
+
+                    </span>
+
+                  </div>
+
+                } @else {
+
+                  <span>
+                    —
+                  </span>
+
+                }
+
+              </td>
+
+            </ng-container>
+
+
+
+            <!-- ACTUALIZACIÓN -->
+
+            <ng-container
+              matColumnDef="update">
+
+              <th
+                mat-header-cell
+                *matHeaderCellDef>
+
+                Actualización
+
+              </th>
+
+
+              <td
+                mat-cell
+                *matCellDef="let element">
+
+                {{
+                  element.update
+                    | date: 'dd/MM/yyyy'
+                }}
+
+              </td>
+
+            </ng-container>
+
+
+
+            <!-- ACCIONES -->
+
+            <ng-container
+              matColumnDef="acciones">
+
+              <th
+                mat-header-cell
+                *matHeaderCellDef>
+
+                Acciones
+
+              </th>
+
+
+              <td
+                mat-cell
+                *matCellDef="let element">
+
+
+                <div class="actions-cell">
+
+
+                  @if (
+                    puedeModificar(element)
+                  ) {
+
+
+                    <button
+                      type="button"
+                      class="action-button edit-button"
+                      aria-label="Editar materia"
+                      (click)="editarMateria(element)">
+
+                      <i class="bi bi-pencil-square"></i>
+
+                    </button>
+
+
+
+                    <button
+                      type="button"
+                      class="action-button delete-button"
+                      aria-label="Eliminar materia"
+                      (click)="eliminarMateria(element)">
+
+                      <i class="bi bi-trash3-fill"></i>
+
+                    </button>
+
+
+                  } @else {
+
+
+                    <span class="read-only-label">
+
+                      Solo lectura
+
+                    </span>
+
+
+                  }
+
+                </div>
+
+              </td>
+
+            </ng-container>
+
+
+
+            <tr
+              mat-header-row
+              *matHeaderRowDef="displayedColumns">
+            </tr>
+
+
+            <tr
+              mat-row
+              *matRowDef="
+                let row;
+                columns: displayedColumns;
+              ">
+            </tr>
+
+
+          </table>
+
+
+
+          <!-- PAGINADOR -->
+
+          <mat-paginator
+            [pageSize]="5"
+            [pageSizeOptions]="[5, 10, 20]"
+            showFirstLastButtons
+            aria-label="Paginación de materias">
+          </mat-paginator>
+
+
+        </div>
+
+      }
+
+    </section>
+
+  </div>
+
+</div>

@@ -1,0 +1,664 @@
+.main-content-materias {
+  margin-left: 220px;
+  min-height: calc(100vh - 56px);
+  transition: margin-left .3s ease;
+}
+
+.wrapper {
+  width: auto;
+  background: var(--background-main, #f5f5f5);
+  color: var(--text-main, #222);
+}
+
+.body-materias {
+  width: 100%;
+  padding: 2.2rem 3rem 3rem;
+}
+
+
+/* =========================================================
+   ENCABEZADO
+   ========================================================= */
+
+.page-header,
+.list-header,
+.search-section,
+.form-card-header,
+.form-actions,
+.actions-cell,
+.records-counter {
+  display: flex;
+  align-items: center;
+}
+
+.page-header {
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.page-header > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+}
+
+.title-perfil {
+  font-family: Nexa-Bold;
+  font-size: 1.95rem;
+  color: var(--text-main, #231f20);
+  line-height: 1.15;
+}
+
+.role-label,
+.form-subtitle,
+.list-subtitle,
+.records-counter,
+.materia-description,
+.creator-email {
+  color: var(--secondary, #6c757d);
+}
+
+.role-label {
+  font-size: 1rem;
+}
+
+
+/* =========================================================
+   BOTONES
+   ========================================================= */
+
+.btn-primary {
+  background: #0092b8 !important;
+  border-color: #0092b8 !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  font-family: Nexa-Bold;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #017895 !important;
+  border-color: #017895 !important;
+}
+
+.btn-nueva-materia,
+.btn-form,
+.btn-refresh {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+}
+
+.btn-nueva-materia {
+  padding: .65rem 1.1rem;
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   TARJETAS
+   ========================================================= */
+
+.materia-form-card,
+.materias-list-card {
+  background: var(--table-bg, #fff);
+  border: 1px solid rgba(35, 57, 93, .10);
+  border-radius: 14px;
+  box-shadow: 0 5px 22px rgba(0, 0, 0, .06);
+}
+
+.materia-form-card {
+  padding: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.materias-list-card {
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   FORMULARIO
+   ========================================================= */
+
+.form-card-header {
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding-bottom: 1.15rem;
+  margin-bottom: 1.4rem;
+
+  border-bottom:
+    1px solid rgba(128, 128, 128, .16);
+}
+
+.form-title,
+.title-table,
+.materia-name,
+.creator-name {
+  font-family: Nexa-Bold;
+  color: var(--text-main, #231f20);
+}
+
+.form-title {
+  display: block;
+  font-size: 1.45rem;
+}
+
+.form-subtitle,
+.list-subtitle {
+  margin: .3rem 0 0;
+  font-size: .95rem;
+}
+
+.icon-close-button {
+  width: 38px;
+  height: 38px;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: transparent;
+  color: var(--text-main, #231f20);
+
+  cursor: pointer;
+}
+
+.icon-close-button:hover {
+  background: rgba(128, 128, 128, .12);
+}
+
+.form-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: .7rem 1.25rem;
+}
+
+.field-group {
+  min-width: 0;
+}
+
+.field-description {
+  grid-column: 1 / -1;
+}
+
+.full-field {
+  width: 100%;
+}
+
+.description-field textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.invalid-feedback {
+  display: block;
+
+  margin:
+    -.85rem 0 .45rem;
+
+  padding-left: .25rem;
+}
+
+.form-actions {
+  justify-content: flex-end;
+  gap: .8rem;
+  padding-top: .8rem;
+}
+
+.btn-form {
+  min-width: 160px;
+  border-radius: 8px;
+  font-family: Nexa-Bold;
+}
+
+
+/* =========================================================
+   LISTA
+   ========================================================= */
+
+.list-header {
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding:
+    1.45rem 1.6rem 1rem;
+}
+
+.title-table {
+  margin: 0;
+  font-size: 1.65rem;
+}
+
+.btn-refresh {
+  border: 1px solid #0092b8;
+
+  background: transparent;
+
+  color: #0092b8;
+
+  border-radius: 8px;
+
+  padding: .5rem .9rem;
+
+  font-family: Nexa-Bold;
+
+  cursor: pointer;
+}
+
+.btn-refresh:hover:not(:disabled) {
+  background: #0092b8;
+  color: #fff;
+}
+
+.btn-refresh:disabled {
+  opacity: .55;
+  cursor: default;
+}
+
+
+/* =========================================================
+   BUSCADOR
+   ========================================================= */
+
+.search-section {
+  justify-content: space-between;
+  gap: 1rem;
+
+  padding:
+    0 1.6rem 1.2rem;
+}
+
+.search-field {
+  width: min(620px, 100%);
+}
+
+.records-counter {
+  gap: .45rem;
+
+  white-space: nowrap;
+
+  font-size: .92rem;
+}
+
+.records-counter .material-icons {
+  font-size: 1.15rem;
+}
+
+
+/* =========================================================
+   TABLA
+   ========================================================= */
+
+.table-scroll-wrapper {
+  width: 100%;
+
+  overflow-x: auto;
+
+  -webkit-overflow-scrolling: touch;
+
+  border-top:
+    1px solid rgba(128, 128, 128, .14);
+}
+
+.materias-table {
+  width: 100%;
+
+  min-width: 1050px;
+
+  background:
+    var(--table-bg, #fff);
+}
+
+.mat-mdc-header-cell {
+  font-family: Nexa-Bold;
+
+  font-size: .92rem;
+
+  white-space: nowrap;
+}
+
+.mat-mdc-cell {
+  font-family: Nexa;
+
+  vertical-align: middle;
+
+  padding-top: .8rem;
+  padding-bottom: .8rem;
+}
+
+
+/* Clave */
+
+.clave-badge {
+  display: inline-flex;
+
+  align-items: center;
+
+  padding: .35rem .6rem;
+
+  border-radius: 7px;
+
+  background:
+    rgba(0, 146, 184, .12);
+
+  color: #017895;
+
+  font-family: Nexa-Bold;
+
+  white-space: nowrap;
+}
+
+
+/* Nombre y creador */
+
+.materia-name-cell,
+.creator-cell {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+}
+
+.materia-description {
+  display: block;
+
+  max-width: 300px;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+
+  font-size: .85rem;
+}
+
+.creator-email {
+  font-size: .82rem;
+}
+
+
+/* Estados */
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+
+  gap: .4rem;
+
+  padding: .35rem .65rem;
+
+  border-radius: 999px;
+
+  font-size: .86rem;
+
+  font-family: Nexa-Bold;
+
+  white-space: nowrap;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: currentColor;
+}
+
+.status-active {
+  background:
+    rgba(67, 160, 71, .13);
+
+  color: #2e7d32;
+}
+
+.status-inactive {
+  background:
+    rgba(108, 117, 125, .14);
+
+  color: #6c757d;
+}
+
+
+/* Acciones */
+
+.actions-cell {
+  gap: .5rem;
+}
+
+.action-button {
+  width: 36px;
+  height: 36px;
+
+  border: 0;
+
+  border-radius: 8px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+}
+
+.edit-button {
+  background:
+    rgba(0, 146, 184, .12);
+
+  color: #007f9f;
+}
+
+.delete-button {
+  background:
+    rgba(220, 53, 69, .11);
+
+  color: #dc3545;
+}
+
+.read-only-label {
+  color:
+    var(--secondary, #6c757d);
+
+  font-size: .82rem;
+
+  white-space: nowrap;
+}
+
+
+/* Paginador */
+
+mat-paginator {
+  min-width: 1050px;
+
+  background:
+    var(--table-bg, #fff);
+
+  color:
+    var(--text-main, #222);
+}
+
+
+/* =========================================================
+   CARGA Y ESTADOS VACÍOS
+   ========================================================= */
+
+.loading-state,
+.empty-state {
+  min-height: 250px;
+
+  padding: 2.5rem 1.5rem;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  gap: .65rem;
+
+  border-top:
+    1px solid rgba(128, 128, 128, .14);
+}
+
+.loading-state,
+.empty-icon {
+  color: #0092b8;
+}
+
+.empty-icon {
+  font-size: 3rem;
+}
+
+.empty-state h3 {
+  margin: .25rem 0 0;
+
+  color:
+    var(--text-main, #231f20);
+}
+
+.empty-state p {
+  margin: 0;
+
+  color:
+    var(--secondary, #6c757d);
+}
+
+.compact-empty {
+  min-height: 220px;
+}
+
+
+/* =========================================================
+   MODO OSCURO
+   ========================================================= */
+
+[data-theme='dark']
+.clave-badge {
+  background:
+    rgba(0, 146, 184, .20);
+
+  color: #69d4ef;
+}
+
+[data-theme='dark']
+.status-active {
+  background:
+    rgba(129, 199, 132, .14);
+
+  color: #81c784;
+}
+
+[data-theme='dark']
+.status-inactive {
+  background:
+    rgba(189, 189, 189, .12);
+
+  color: #bdbdbd;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 991px) {
+
+  .main-content-materias {
+    margin-left: 0;
+  }
+
+  .body-materias {
+    padding:
+      1.5rem 1.2rem 2.5rem;
+  }
+
+}
+
+
+/* =========================================================
+   TABLET PEQUEÑA / MÓVIL
+   ========================================================= */
+
+@media (max-width: 767px) {
+
+  .page-header,
+  .list-header,
+  .search-section {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .page-header {
+    text-align: center;
+  }
+
+  .btn-nueva-materia,
+  .btn-refresh {
+    width: 100%;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .field-description {
+    grid-column: auto;
+  }
+
+  .search-field {
+    width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   MÓVIL
+   ========================================================= */
+
+@media (max-width: 575px) {
+
+  .body-materias {
+    padding:
+      1rem .75rem 2rem;
+  }
+
+  .materia-form-card {
+    padding: 1.1rem;
+    border-radius: 11px;
+  }
+
+  .list-header,
+  .search-section {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .btn-form {
+    width: 100%;
+  }
+
+  .title-perfil {
+    font-size: 1.55rem;
+  }
+
+  .form-title {
+    font-size: 1.25rem;
+  }
+
+}
